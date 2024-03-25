@@ -1,6 +1,6 @@
 {
   "name": "@electric-sql/pglite",
-  "version": "0.0.1-alpha.1",
+  "version": "0.0.2",
   "private": false,
   "publishConfig": {
     "access": "public"
@@ -21,16 +21,22 @@
     "directory": "packages/pglite"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ava",
     "build:wasm": "cd ../../postgres/ && make -f ../packages/pglite/Makefile build",
+    "build:wasm:debug": "cd ../../postgres/ && make -f ../packages/pglite/Makefile build-debug",
     "build:sharedir": "cd ../../postgres/ && make -f ../packages/pglite/Makefile sharedir",
+    "build:sharedir:debug": "cd ../../postgres/ && make -f ../packages/pglite/Makefile sharedir-debug",
     "build:js": "tsup && tsx scripts/bundle-wasm.ts",
     "build": "npm run build:wasm && npm run build:sharedir && npm run build:js",
+    "build:debug": "npm run build:wasm:debug && npm run build:sharedir:debug && npm run build:js",
     "format": "prettier --write ./src"
   },
   "devDependencies": {
     "@types/node": "^20.11.18",
     "async-mutex": "^0.4.1",
+    "ava": "^6.1.2",
+    "http-server": "^14.1.1",
+    "playwright": "^1.42.1",
     "prettier": "3.2.5",
     "tsup": "^8.0.2",
     "tsx": "^4.7.1",
